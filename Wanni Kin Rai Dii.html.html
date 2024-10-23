@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>วันนี้กินอะไรดี?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-image: url("file:///C:/Users/panay/Downloads/812733.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        h1 {
+            color: #000000;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 5px;
+        }
+
+        .box {
+            border-radius: 25px;
+            padding: 25px;
+            width: 300px;
+            height: auto;
+            background-color: rgb(255, 255, 255);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            margin: 1px;
+        }
+
+        .header {
+            background-color: #000000;
+            text-align: center;
+            padding: 18px;
+        }
+
+        #Whint {
+            color: #ffffff;
+        }
+
+        #foodImage {
+            display: block;
+            margin: 20px auto;
+            width: 200px;
+            height: 200px;
+        }
+
+        #drinkImage {
+            display: block;
+            margin: 20px auto;
+            width: 200px;
+            height: 200px;
+        }
+
+        #dessertImage {
+            display: block;
+            margin: 20px auto;
+            width: 200px;
+            height: 200px;
+        }
+
+        #food {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #4CAF50;
+        }
+
+        #drink {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #4CAF50;
+        }
+
+        #dessert {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #4CAF50;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1 id="Whint">What should I eat today?🍳🥓</h1>
+    </div>
+    <center>
+        <br><br>
+        <div class="container">
+            <div class="box">
+                <h1>วันนี้กินอะไรดี?</h1>
+                <button onclick="suggestFood()">สุ่มเมนู</button>
+                <div id="food"></div>
+                <img id="foodImage" src="" alt="" style="display:none;">
+            </div>
+
+            <div class="box">
+                <h1>วันนี้กินน้ำอะไรดี</h1>
+                <button onclick="suggestDrink()">สุ่มน้ำ</button>
+                <div id="drink"></div>
+                <img id="drinkImage" src="" alt="" style="display:none;">
+            </div>
+
+            <div class="box">
+                <h1>วันนี้กินขนมอะไรดี</h1>
+                <button onclick="suggestDessert()">สุ่มขนมหวาน</button>
+                <div id="dessert"></div>
+                <img id="dessertImage" src="" alt="" style="display:none;">
+            </div>
+        </div>
+    </center>
+
+    <script>
+        const foods = [
+            { name: "ข้าวผัด", image: "file:///C:/Users/panay/OneDrive/Desktop/manu/resive_04062021_430x320px-2_0.png" },
+            { name: "ต้มยำกุ้ง", image: "file:///C:/Users/panay/OneDrive/Desktop/manu/Tumyam.jpg" },
+            { name: "ผัดไทย", image: "file:///C:/Users/panay/OneDrive/Desktop/manu/ผัดไทยกุ้งสด_header.png" },
+            { name: "ส้มตำ", image: "file:///C:/Users/panay/OneDrive/Desktop/manu/1695118740332.png" },
+            { name: "แกงเขียวหวาน", image: "file:///C:/Users/panay/OneDrive/Desktop/manu/ThaiGreen-ChickenCurry-52.webp" },
+            { name: "ข้าวมันไก่", image: "file:///C:/Users/panay/OneDrive/Desktop/manu/dFQROr7oWzulq5Fa5naLwWtYtNesZaki91wtz8N9CQg7YZvxZMhzjwoOWiUn6p2zikv.jpg" },
+            { name: "ก๋วยเตี๋ยว", image: "file:///C:/Users/panay/OneDrive/Desktop/manu/ae1b16d9-731c-4105-8898-7deaf90bc167.jpg" },
+            { name: "พิซซ่า", image: "file:///C:/Users/panay/OneDrive/Desktop/manu/พิซซ่า_8_หน้า_01.jpg" },
+            { name: "สเต็ก", image: "file:///C:/Users/panay/OneDrive/Desktop/manu/steak.webp" },
+            { name: "ซูชิ", image: "file:///C:/Users/panay/OneDrive/Desktop/manu/images.jpg" }
+        ];
+
+        const drinks = [
+            { name: "น้ำเปล่า", image: "file:///C:/Users/panay/OneDrive/Desktop/manu/drinking-water.jpg" },
+            { name: "น้ำอัดลม", image: "file:///C:/Users/panay/OneDrive/Desktop/manu/soda-carbonated-drink.jpg" },
+            { name: "น้ำผลไม้", image: "file:///C:/Users/panay/OneDrive/Desktop/manu/fruitjuice.jpg" },
+            { name: "ชา", image: "file:///C:/Users/panay/OneDrive/Desktop/manu/ofuzn7.jpg" },
+            { name: "กาแฟ", image: "file:///C:/Users/panay/OneDrive/Desktop/manu/coffee2.jpg" }
+        ];
+
+
+        const desserts = [
+            { name: "เค้ก", image: "file:///C:/Users/panay/OneDrive/Desktop/manu/Mini-cake5-1.jpg" },
+            { name: "ไอศกรีม", image: "file:///C:/Users/panay/OneDrive/Desktop/manu/a5e18a09-cc61-4c36-a94e-3d4dd7267239.jpg" },
+            { name: "ขนมหวานไทย", image: "file:///C:/Users/panay/OneDrive/Desktop/manu/ขนมหวานของไทย.jpg" },
+            { name: "พาย", image: "file:///C:/Users/panay/OneDrive/Desktop/manu/Business_tip_pie_2.webp" },
+            { name: "หม้อแกง", image: "file:///C:/Users/panay/OneDrive/Desktop/manu/thumb_46.webp" }
+        ];
+
+
+        function suggestFood() {
+            const randomIndex = Math.floor(Math.random() * foods.length);
+            const selectedFood = foods[randomIndex];
+            document.getElementById('food').innerText = selectedFood.name;
+            const foodImage = document.getElementById('foodImage');
+            foodImage.src = selectedFood.image;
+            foodImage.style.display = "block"; // แสดงรูปภาพ
+        }
+
+        function suggestDrink() {
+            const randomIndex = Math.floor(Math.random() * drinks.length);
+            const selectedDrink = drinks[randomIndex];
+            document.getElementById('drink').innerText = selectedDrink.name;
+            const drinkImage = document.getElementById('drinkImage'); // แก้ไขที่นี่
+            drinkImage.src = selectedDrink.image; // ใช้ selectedDrink แทน selectedFood
+            drinkImage.style.display = "block"; // แสดงรูปภาพ
+        }
+
+        function suggestDessert() {
+            const randomIndex = Math.floor(Math.random() * desserts.length);
+            const selectedDessert = desserts[randomIndex];
+            document.getElementById('dessert').innerText = selectedDessert.name;
+            const dessertImage = document.getElementById('dessertImage'); // เพิ่มรูปภาพสำหรับขนมหวาน
+            dessertImage.src = selectedDessert.image; // แสดงรูปภาพ
+            dessertImage.style.display = "block"; // แสดงรูปภาพ
+        }
+    </script>
+</body>
+
+</html>
